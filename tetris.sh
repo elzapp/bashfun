@@ -288,9 +288,14 @@ function render() {
         done
         printf "║\n"
     done
-    printf "╚════════════════════╝\n\n"
-    printf "  Controls:\n"
-    printf "  %3s = %s\n" "A/D" "Move left/right" "W" "Rotate" "S" "Hard drop" "Q" "Quit" "P" "Pause"
+    printf "╚════════════════════╝\n"
+    printf "$POSITION  Controls:\n" 6 24
+    printf "$POSITION  %3s = %s\n" \
+        7 24 "A/D" "Move left/right" \
+        8 24 "W" "Rotate" \
+        9 24 "S" "Hard drop" \
+        10 24 "Q" "Quit" \
+        11 24 "P" "Pause"
     printf $POSITION 3 24
     printf "  %7s %6d" "Score:" $score
     printf $POSITION 4 24
