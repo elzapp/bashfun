@@ -303,13 +303,14 @@ function main() {
     spawn_new_piece
     
     local last_drop=$(date +%s%N)
-    local drop_interval=1000000000  # 1 second in nanoseconds
+    local starting_drop_interval=1000000000
     local game_over=0
     
     draw_piece
     render
     
     while ((game_over == 0)); do
+        local drop_interval=$(( starting_drop_interval - (score * 100000)  ))
         erase_piece
         
         local key=""
