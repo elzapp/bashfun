@@ -5,8 +5,8 @@
 #
 
 if ((BASH_VERSINFO[0] < 5)); then
-    echo "Error: This script requires Bash version 5 or higher."
-    echo "Current version: $BASH_VERSION"
+    printf "Error: This script requires Bash version 5 or higher.\n"
+    printf "Current version: %s\n" $BASH_VERSION
     exit 1
 fi
 
@@ -115,7 +115,7 @@ function get_bitmap() {
     IFS='|' read -r -a rotation_arr <<< "$rotations"
     local num_rotations=${#rotation_arr[@]}
     local actual_rotation=$((rotation % num_rotations))
-    echo "${rotation_arr[$actual_rotation]}"
+    printf "%s\n" "${rotation_arr[$actual_rotation]}"
 }
 
 function can_move_piece() {
@@ -279,25 +279,20 @@ function hard_drop() {
 function render() {
     printf $POSITION 0 0  # Move cursor to top-left
     
-    echo "╔════════════════════╗"
+    printf "╔════════════════════╗\n"
     for ((y=0; y<BOARD_HEIGHT; y++)); do
-        echo -n "║"
+        printf "║"
         for ((x=0; x<BOARD_WIDTH; x++)); do
             local cell=${board[$x,$y]}
-            echo -en "${COLORS[$cell]}"
+            printf "${COLORS[$cell]}"
         done
-        echo "║"
+        printf "║\n"
     done
-    echo "╚════════════════════╝"
-    echo ""
-    echo "  Score: $score"
-    echo "  Lines: $lines_cleared"
-    echo ""
-    echo "  Controls:"
-    echo "  A/D = Move left/right"
-    echo "  W   = Rotate"
-    echo "  S   = Hard drop"
-    echo "  Q   = Quit"
+    printf "╚════════════════════╝\n\n"
+    printf "  %7s %6d\n" "Score:" $score
+    printf "  %7s %6d\n\n" "Lines:" $lines_cleared
+    printf "  Controls:\n"
+    printf "  %3s = %s\n" "A/D" "Move left/right" "W" "Rotate" "S" "Hard drop" "Q" "Quit"
 }
 
 
@@ -349,15 +344,15 @@ function main() {
     done
     
     printf $POSITION 12 4
-    echo "╔══════════════╗"
+    printf "╔══════════════╗\n"
     printf $POSITION 13 4
-    echo "║  GAME OVER!  ║"
+    printf "║  GAME OVER!  ║\n"
     printf $POSITION 14 4
-    echo "╠══════════════╣"
+    printf "╠══════════════╣\n"
     printf $POSITION 15 4
     printf "║ Score: %5d ║\n" $score
     printf $POSITION 16 4
-    echo "╚══════════════╝"
+    printf "╚══════════════╝\n"
     
     sleep 3
 }
