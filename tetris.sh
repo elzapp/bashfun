@@ -289,10 +289,12 @@ function render() {
         printf "║\n"
     done
     printf "╚════════════════════╝\n\n"
-    printf "  %7s %6d\n" "Score:" $score
-    printf "  %7s %6d\n\n" "Lines:" $lines_cleared
     printf "  Controls:\n"
     printf "  %3s = %s\n" "A/D" "Move left/right" "W" "Rotate" "S" "Hard drop" "Q" "Quit" "P" "Pause"
+    printf $POSITION 3 24
+    printf "  %7s %6d" "Score:" $score
+    printf $POSITION 4 24
+    printf "  %7s %6d\n\n" "Lines:" $lines_cleared
 }
 
 function pause() {
