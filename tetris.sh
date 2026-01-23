@@ -292,7 +292,18 @@ function render() {
     printf "  %7s %6d\n" "Score:" $score
     printf "  %7s %6d\n\n" "Lines:" $lines_cleared
     printf "  Controls:\n"
-    printf "  %3s = %s\n" "A/D" "Move left/right" "W" "Rotate" "S" "Hard drop" "Q" "Quit"
+    printf "  %3s = %s\n" "A/D" "Move left/right" "W" "Rotate" "S" "Hard drop" "Q" "Quit" "P" "Pause"
+}
+
+function pause() {
+    printf $POSITION 12 4
+    printf "╔══════════════╗\n"
+    printf $POSITION 13 4
+    printf "║    PAUSE !   ║\n"
+    printf $POSITION 14 4
+    printf "╚══════════════╝\n"
+
+    read -rsn1 _
 }
 
 
@@ -328,6 +339,7 @@ function main() {
                 last_drop=$(date +%s%N)
                 ;;
             q|Q) game_over=1 ;;
+            p|P) pause ;;
         esac
         
         local now=$(date +%s%N)
